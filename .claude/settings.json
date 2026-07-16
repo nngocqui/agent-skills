@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'file=\"${CLAUDE_TOOL_INPUT_FILE_PATH:-}\"; if [[ \"$file\" == *PLAN.md ]]; then spec=\"$(dirname \"$file\")/SPEC.md\"; tc=\"$(dirname \"$file\")/TC.md\"; if [[ -f \"$spec\" && -f \"$tc\" && -f \"$file\" ]]; then bash \"$(git rev-parse --show-toplevel)/scripts/validate-sc-tags.sh\" --spec \"$spec\" --tc \"$tc\" --plan \"$file\"; fi; fi'"
+          }
+        ]
+      }
+    ]
+  }
+}
