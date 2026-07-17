@@ -96,6 +96,9 @@ Already complete:   —
 
 In `--auto` mode: display the plan and wait for unambiguous human approval ("approve" / "go" / "yes") before proceeding. Treat "looks good" or "I guess" as NOT approved.
 
+> [!NOTE]
+> `--auto` mode requires human input capability. Run `/implf:full --auto` from your primary Claude session — not inside a spawned subagent, which cannot pause to receive conversational responses. If you are operating as a subagent, treat `--auto` as single-story mode: run one story and return control to the orchestrating session.
+
 In single-story mode (default): display the plan, then run only the next eligible story (lowest wave, lowest ID), then stop.
 
 ### Step 4: Per-story impl loop

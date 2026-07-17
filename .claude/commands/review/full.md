@@ -32,7 +32,7 @@ No arguments. Reads all inputs from the project root.
 | **Fidelity** | SC tags satisfied per §7 | Same |
 | **Type Health** | tsc clean · DTO ↔ §4 contract · no untyped any | tsc clean · Zod ↔ §5 props · no untyped any |
 | **Coverage** | Vitest ≥ 85% changed files (10) · TC.md PASS (5) · e2e spec + suite pass (10) | Vitest ≥ 85% changed files (10) · TC.md PASS (5) · stories + Playwright spec + suite (10) |
-| **Dimension 4** | Security (OWASP, guards, Prisma, pino) | A11y + Perf (WCAG 2.1 AA, re-renders, staleTime, i18n) |
+| **Dimension 4** | Security (OWASP, guards, Prisma, pino) | A11y + Design + Perf (WCAG 2.1 AA, design-plan token adherence, `prefers-reduced-motion`, UX copy, re-renders, staleTime, i18n) |
 
 ## Verdicts
 
@@ -42,6 +42,17 @@ No arguments. Reads all inputs from the project root.
 | 75–89 | **MINOR** | Fix issues · re-run review · then docs |
 | 60–74 | **REWORK** | `/impl:full` to fix |
 | < 60 or P0 fail | **BLOCK** | Human review required |
+
+## FE D4 — design fidelity checks
+
+When scope includes FE (FULL_STACK or FE_ONLY), the D4 dimension includes:
+
+- **Token adherence**: components use token names from `design-plan.md` (or the project's design system); no arbitrary hex values or spacing outside the token set
+- **Motion**: `prefers-reduced-motion` is respected on every animation; no more than one "featured" animation per view
+- **UX copy**: interactive elements use active voice and specific verbs ("Save changes", not "Submit"); action names are consistent across button → loading state → success toast
+- **A11y**: WCAG 2.1 AA — keyboard navigation, ARIA labels, focus management, contrast ≥ 4.5:1
+
+If `design-plan.md` is absent and the task created new pages or views, deduct 5 pts from D4 and note: "No design plan found — token provenance unverifiable."
 
 ## P0 gates
 

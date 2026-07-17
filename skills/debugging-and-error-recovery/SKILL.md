@@ -190,6 +190,10 @@ Test fails after code change:
 ```
 Build fails:
 ├── Type error → Read the error, check the types at the cited location
+│   └── Unknown option/method/property on a library type?
+│       → Likely a version mismatch, not a code bug
+│       → Check package.json pinned version, then invoke pod/skills/stack-reference
+│         before attempting a fix (e.g. TanStack Query v5 renamed most option keys)
 ├── Import error → Check the module exists, exports match, paths are correct
 ├── Config error → Check build config files for syntax/schema issues
 ├── Dependency error → Check package.json, run npm install

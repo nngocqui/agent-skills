@@ -118,7 +118,9 @@ Track averages never, percentiles always: an average hides the 1% of users havin
 
 ### 5. Distributed tracing
 
-Use OpenTelemetry — it's the vendor-neutral standard, and auto-instrumentation covers HTTP, gRPC, and common DB clients with near-zero code:
+Use OpenTelemetry — it's the vendor-neutral standard, and auto-instrumentation covers HTTP, gRPC, and common DB clients with near-zero code.
+
+**Version check before writing bootstrap:** `@opentelemetry/sdk-node` and `@opentelemetry/auto-instrumentations-node` are pre-1.0 and ship breaking changes in minor versions — `NodeSDK` constructor options, `start()` / `shutdown()` lifecycle, and `getNodeAutoInstrumentations` config shape have all changed across recent minors. Before writing the bootstrap, read the pinned versions in `package.json` and invoke `pod/skills/stack-reference` (or `/stack-ref @opentelemetry/sdk-node "NodeSDK bootstrap setup"`) if you are not certain the pattern below matches the installed version. Same applies to `nestjs-pino` — its `forRoot` options restructured in v4.
 
 ```typescript
 // tracing.ts — must be imported before anything else

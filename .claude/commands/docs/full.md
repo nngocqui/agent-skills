@@ -42,7 +42,7 @@ Both gates must pass. Either failure stops the command immediately.
 | `README.md` | project root | Feature section added/updated |
 | `ARCHITECTURE.md` | project root | New ADR entry (create if missing) |
 | `API_SPEC.md` | project root | BE: NestJS endpoints with DTOs (from actual code) |
-| `COMPONENT_SPEC.md` | project root | FE: Components with Zod prop types (from actual code) |
+| `COMPONENT_SPEC.md` | project root | FE: Components with Zod prop types, design tokens used, and motion/copy patterns (from actual code) |
 
 ## What docs must reflect
 
@@ -52,6 +52,15 @@ Docs are derived from the **implemented code**, not from:
 - What you intended to build
 
 If the implementation deviates from SPEC.md, flag it with `⚠️ Deviation from §N: ...` in the relevant artifact.
+
+## FE: design plan in docs
+
+If `design-plan.md` exists at the project root:
+
+- **ARCHITECTURE.md ADR**: include a "Design decisions" subsection summarising the palette, type stack, and signature element chosen, with a one-sentence rationale for each. This captures *why* the design looks the way it does — the same information will be invisible from the code alone.
+- **COMPONENT_SPEC.md**: for each component, list which design tokens it uses (`color-primary`, `color-surface`, etc.) and note any motion present (`prefers-reduced-motion` status). This makes token usage auditable without reading every CSS file.
+
+If no `design-plan.md` exists and the feature contains new pages or views, add a `⚠️ No design plan found` note at the top of COMPONENT_SPEC.md.
 
 ## See Also
 

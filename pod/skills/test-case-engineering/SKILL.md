@@ -101,12 +101,14 @@ Invalid input, auth failure, network error, or constraint violation.
 
 For each block, assign the most specific test file based on coverage flags:
 
-| Coverage | skeleton-be file | skeleton-fe file |
-|----------|-----------------|-----------------|
+| Coverage | NestJS BE file | React FE file |
+|----------|---------------|--------------|
 | BE unit | `src/modules/{{module}}/{{module}}.service.spec.ts` | — |
 | BE e2e | `test/{{module}}.e2e-spec.ts` | — |
 | FE unit | — | `src/features/{{feature}}/{{Feature}}.test.tsx` |
 | FE E2E | — | `tests/{{feature}}.spec.ts` |
+
+These paths follow the NestJS + React project conventions. If the project uses a different structure, derive the path from the nearest sibling test file in the same module rather than from this table.
 
 If the test file does not exist yet, note it as `(to be created)`.
 

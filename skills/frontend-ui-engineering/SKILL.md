@@ -130,6 +130,19 @@ AI-generated UI has recognizable patterns. Avoid all of them:
 | Stock card grids | Uniform grids are a layout shortcut that ignores information priority and scanning patterns | Purpose-driven layouts |
 | Shadow-heavy design | Layered shadows add depth that competes with content and slows rendering on low-end devices | Subtle or no shadows unless the design system specifies |
 
+### Tailwind Version Awareness
+
+Tailwind v4 is a full rewrite from v3 with breaking changes:
+
+| Area | v3 | v4 |
+|---|---|---|
+| Config | `tailwind.config.js` with `theme.extend` | CSS-first: `@import "tailwindcss"` + CSS variables |
+| Customization | `theme.extend.colors`, `theme.extend.spacing` | `@theme { --color-*: ...; }` in CSS |
+| Plugins | `plugins: [require(...)]` in config | `@plugin` directive in CSS |
+| Utilities | Some names different | Check migration guide |
+
+Before writing any Tailwind config or utilities you haven't used in this project before, check `package.json` for the pinned version. If the project uses v4, invoke `pod/skills/stack-reference` (or `/stack-ref tailwindcss "config v4 theme customization"`) before writing config or uncertain utility names.
+
 ### Spacing and Layout
 
 Use a consistent spacing scale. Don't invent values:
@@ -292,9 +305,26 @@ function useToggleTask() {
 }
 ```
 
+## Motion
+
+When implementing animations or transitions:
+
+```css
+/* Always gate motion behind the media query */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-enter { animation: fade-up 300ms ease-out; }
+}
+
+/* Or in Tailwind — add to your config */
+/* motion-safe:animate-fade-up */
+```
+
+Keep transitions to opacity/transform at 150–200ms ease-out. Any "featured" animation (hero entrance, page transition) should be a deliberate choice made during design — see the `frontend-design` skill. Avoid adding micro-animations at the component level without that design intent.
+
 ## See Also
 
-For detailed accessibility requirements and testing tools, see `references/accessibility-checklist.md`.
+- `references/accessibility-checklist.md` — detailed WCAG testing tools and requirements
+- `frontend-design` skill — run this first when starting UI from scratch or reshaping visual identity; it produces the token plan this skill implements
 
 ## Common Rationalizations
 

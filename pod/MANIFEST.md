@@ -21,6 +21,7 @@ pod/templates/BLOCKERS.md
 pod/templates/discovery-map.md
 pod/templates/FEATURE.md
 pod/skills/feature-orchestrator/SKILL.md
+pod/skills/stack-reference/SKILL.md
 pod/docs/sc-tag-system.md
 pod/docs/harness-install.md
 pod/docs/3-shot-loop.md
@@ -41,6 +42,8 @@ pod/docs/obsidian-wiki.md
 .claude/commands/implf/full.md      → /implf:full
 .claude/commands/reviewf/full.md    → /reviewf:full
 .claude/commands/docsf/full.md      → /docsf:full
+.claude/commands/stack-ref.md       → /stack-ref
+.claude/commands/design-plan.md     → /design-plan
 ```
 
 ## scripts/ addition (new file alongside upstream files)
@@ -63,6 +66,14 @@ The only change to an upstream-adjacent file. After a merge, verify the `hooks` 
 ```
 tasks/plan.md
 tasks/todo.md
+```
+
+## Upstream additions (new skill directories — contributed, no upstream equivalent yet)
+
+These are new `skills/` directories we've added. They do not modify existing upstream files, so they carry no merge risk unless upstream adds the same directory name.
+
+```
+skills/frontend-design/SKILL.md     → frontend-design skill (runs before frontend-ui-engineering)
 ```
 
 ---

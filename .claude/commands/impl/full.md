@@ -75,6 +75,9 @@ For each TC.md block assigned to this task's `sc_refs`, write every applicable t
 2. **E2E spec** (`test/{{module}}.e2e-spec.ts`) — add a Supertest case for every new or modified HTTP endpoint (happy path + at least one error path). Create the file if it doesn't exist.
 
 **FE — write all three:**
+
+**FE test stack reference:** Before writing MSW handlers, Testing Library queries, or Playwright locators, check pinned versions in `package.json`. Three high-risk version transitions: MSW v2 rewrote the handler API (`http` replaces `rest`, resolver signature changed); Testing Library v14+ deprecated several `getByRole` query options; Playwright v1.40+ recommends `page.locator()` over `page.$()` everywhere. If uncertain about any of these, invoke `pod/skills/stack-reference` (or `/stack-ref <library> <topic>`) before writing test fixtures or locator chains.
+
 1. **Component test** (`src/features/{{feature}}/components/{{name}}.test.tsx`) — Vitest + Testing Library + MSW. Test rendering, user events, loading/error states.
 2. **Story** (`src/features/{{feature}}/components/{{name}}.stories.tsx`) — one story per component state. Required for every new component, no exceptions.
 3. **E2E spec** (`e2e/{{feature}}.spec.ts`) — Playwright scenario for every new page/route. Add to existing spec file if feature already has one.
@@ -101,6 +104,12 @@ Follow `agent-skills:incremental-implementation` rules:
 7. nestjs-pino log at entry and exit of service method
 
 **FE implementation** (skip for BE_ONLY):
+
+**Design gate (new page or view tasks only):** Before writing any component for a new page or view, check whether a design plan exists — look for a `design-plan.md` at the project root, a "Design" section in `SPEC.md`, or token definitions in the project's design system. If none is found, stop and prompt: "No design plan found. Run `/design-plan` first to define palette, type stack, and signature element before building the UI." For sub-components within an already-styled feature, skip this gate.
+
+When a design plan exists, reference its token names throughout component classes/styles — do not invent arbitrary color values or spacing outside the plan's token set. Follow `agent-skills:frontend-design` principles for motion (one orchestrated moment, `prefers-reduced-motion` respected) and UX copy (active voice, consistent action naming).
+
+**Stack reference:** If about to use a library API that has known major-version breaking changes (TanStack Query v4→v5, Prisma v4→v5, NestJS v9→v10, Playwright locator API) or one you are uncertain about, invoke `pod/skills/stack-reference` (or run `/stack-ref <library> <topic>`) before writing the call. Do not invoke it for stable, well-known patterns already used successfully earlier in this session.
 
 Before writing any hook or API call: **check `src/api/generated/` first.**
 If the endpoint is already covered by an orval-generated hook, import it. Only write a custom hook in `src/features/{{feature}}/hooks/` when you need to compose or enrich the generated one. If `openapi.json` is stale, run `pnpm gen:spec` in skeleton-be then `pnpm gen:api` in skeleton-fe before proceeding.
